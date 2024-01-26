@@ -2,14 +2,16 @@
 
 Updated code of the book "Building Games with Flutter" by Paul Teale / Packt
 
-Code updated for Flame 1.14 / Flutter 3.16
+for Flame 1.14 / Flutter 3.16
 
 - https://flame-engine.org/
 - https://flutter.dev/
 
-Notable differences: adding components to `world`, different particle effect. Checked chapter 8 on web, other chapters on macOS.
+Rationale: I found the book to be a good comprehensive introduction to game development with the Flame game engine. However, Flame has changed a lot since the book came out. So I updated the code as I went through the chapters as an exercise. I left most of the code intect with two the notable differences: adding components to the `world` instead of the game object, and tweaking the particle effect. Checked chapter 8 on web, and other chapters on macOS.
 
 TODO: test on mobile, refactor a few places, tweak parameters
+
+Platform folders are not in git so you have to add them yourself.
 
 Building Games with Flutter by Paul Teale, Packt, 2021.
 - https://www.packtpub.com/product/building-games-with-flutter/9781801816984
