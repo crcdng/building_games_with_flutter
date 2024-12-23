@@ -2,12 +2,9 @@
 
 Updated code for "Building Games with Flutter" by Paul Teale, Packt Publishing, 2022
 
-Flame 2.14 / Flutter 3.16
+Flame 1.22 / Flutter 3.27
 
 Chapter 8
 
 - for web
-- logic moved into onGameResize
-- background music is commented out, doesn't work on the web
-- flutter build web --release --web-renderer canvaskit
-
+- BUG: starting background music or playing any sounds without prior user interaction throws an Exception on web

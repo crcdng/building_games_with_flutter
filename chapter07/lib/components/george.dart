@@ -2,22 +2,21 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
-import 'package:goldrush/components/character.dart';
-import 'package:goldrush/components/hud/hud.dart';
-import 'package:goldrush/components/skeleton.dart';
-import 'package:goldrush/components/water.dart';
-import 'package:goldrush/components/zombie.dart';
-import 'package:goldrush/components/coin.dart';
-import 'package:goldrush/utils/math_utils.dart';
+import 'character.dart';
+import 'hud/hud.dart';
+import 'skeleton.dart';
+import 'water.dart';
+import 'zombie.dart';
+import 'coin.dart';
+import '../utils/math_utils.dart';
 import 'package:flame_audio/flame_audio.dart';
 
 class George extends Character {
   George(
       {required this.hud,
-      required Vector2 position,
-      required Vector2 size,
-      required double speed})
-      : super(position: position, size: size, speed: speed);
+      required super.position,
+      required super.size,
+      required super.speed});
 
   final HudComponent hud;
   late double walkingSpeed, runningSpeed;
@@ -68,8 +67,8 @@ class George extends Character {
   }
 
   @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    super.onCollision(points, other);
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
 
     if (other is Zombie || other is Skeleton) {
       other.removeFromParent();
@@ -228,12 +227,14 @@ class George extends Character {
     playing = false;
   }
 
+  @override
   void onPaused() {
     if (isMoving) {
       audioPlayerRunning.pause();
     }
   }
 
+  @override
   void onResumed() async {
     if (isMoving) {
       audioPlayerRunning.resume();

@@ -45,6 +45,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# remove all platform foldres
+# remove all platform folders
 macos/
 web/
+ios/
+android/
+windows/

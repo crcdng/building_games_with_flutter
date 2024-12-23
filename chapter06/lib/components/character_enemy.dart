@@ -1,14 +1,13 @@
-import 'package:goldrush/components/character.dart';
+import 'character.dart';
 import 'package:flame/components.dart';
 import 'dart:math';
 
 class EnemyCharacter extends Character {
   EnemyCharacter(
-      {required Vector2 position, required Vector2 size, required double speed})
-      : super(position: position, size: size, speed: speed);
+      {required super.position, required super.size, required super.speed});
 
   void changeDirection() {
-    Random random = new Random();
+    Random random = Random();
     int newDirection = random.nextInt(4);
 
     switch (newDirection) {
@@ -30,10 +29,10 @@ class EnemyCharacter extends Character {
   }
 
   @override
-  void update(double deltaTime) {
-    super.update(deltaTime);
+  void update(double dt) {
+    super.update(dt);
 
-    elapsedTime += deltaTime;
+    elapsedTime += dt;
     if (elapsedTime > 3.0) {
       changeDirection();
       elapsedTime = 0.0;
@@ -41,23 +40,23 @@ class EnemyCharacter extends Character {
 
     switch (currentDirection) {
       case Character.down:
-        position.y += speed * deltaTime;
+        position.y += speed * dt;
         break;
       case Character.left:
-        position.x -= speed * deltaTime;
+        position.x -= speed * dt;
         break;
       case Character.up:
-        position.y -= speed * deltaTime;
+        position.y -= speed * dt;
         break;
       case Character.right:
-        position.x += speed * deltaTime;
+        position.x += speed * dt;
         break;
     }
   }
 
   @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    super.onCollision(points, other);
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
     if (other is ScreenHitbox) {
       switch (currentDirection) {
         case Character.down:

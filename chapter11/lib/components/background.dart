@@ -16,12 +16,12 @@ class Background extends PositionComponent with TapCallbacks {
   }
 
   @override
-  void onGameResize(Vector2 canvasSize) {
-    super.onGameResize(canvasSize);
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
 
-    Rect gameScreenBounds = getGameScreenBounds(canvasSize);
-    if (canvasSize.x > 1600) {
-      double xAdjust = (canvasSize.x - 1600) / 2;
+    Rect gameScreenBounds = getGameScreenBounds(size);
+    if (size.x > 1600) {
+      double xAdjust = (size.x - 1600) / 2;
       position = Vector2(gameScreenBounds.left + xAdjust, gameScreenBounds.top);
     } else {
       position = Vector2(gameScreenBounds.left, gameScreenBounds.top);

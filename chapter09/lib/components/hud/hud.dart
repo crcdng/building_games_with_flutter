@@ -1,10 +1,10 @@
 import 'package:flame/components.dart';
-import 'package:goldrush/components/hud/run_button.dart';
-import 'package:goldrush/components/hud/score_text.dart';
-import 'package:goldrush/components/hud/joystick.dart';
+import 'run_button.dart';
+import 'score_text.dart';
+import 'joystick.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
-import 'package:goldrush/utils/math_utils.dart';
+import '../../utils/math_utils.dart';
 
 class HudComponent extends PositionComponent {
   HudComponent() : super(priority: 20);
@@ -15,10 +15,10 @@ class HudComponent extends PositionComponent {
   bool isInitialised = false;
 
   @override
-  void onGameResize(Vector2 canvasSize) {
-    super.onGameResize(canvasSize);
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
 
-    Rect gameScreenBounds = getGameScreenBounds(canvasSize);
+    Rect gameScreenBounds = getGameScreenBounds(size);
 
     if (!isInitialised) {
       final joystickKnobPaint = BasicPalette.blue.withAlpha(200).paint();

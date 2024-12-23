@@ -1,17 +1,16 @@
 import 'package:flame/experimental.dart'; // Shape / Rectangle.fromLTRB
 
-import 'package:goldrush/components/background.dart';
-import 'package:goldrush/components/character.dart';
-import 'package:goldrush/components/coin.dart';
-import 'package:goldrush/components/george.dart';
-import 'package:goldrush/components/hud/hud.dart';
-import 'package:goldrush/components/water.dart';
-import 'package:goldrush/components/zombie.dart';
-import 'package:goldrush/components/skeleton.dart';
-import 'package:goldrush/components/tilemap.dart';
-import 'package:goldrush/utils/math_utils.dart';
+import 'components/background.dart';
+import 'components/character.dart';
+import 'components/coin.dart';
+import 'components/george.dart';
+import 'components/hud/hud.dart';
+import 'components/water.dart';
+import 'components/zombie.dart';
+import 'components/skeleton.dart';
+import 'components/tilemap.dart';
+import 'utils/math_utils.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +40,7 @@ class GoldRush extends FlameGame
     // FlameAudio.bgm.initialize();
     // await FlameAudio.bgm.play('music/music.mp3', volume: 0.1);
 
-    var hud = HudComponent();
+    var hud = HudComponent()..size = size;
     var george = George(
         hud: hud,
         position:
@@ -102,9 +101,8 @@ class GoldRush extends FlameGame
 
   @override
   void onRemove() {
-    FlameAudio.bgm.stop();
-    FlameAudio.bgm.dispose();
-
+    // FlameAudio.bgm.stop();
+    // FlameAudio.bgm.dispose();
     super.onRemove();
   }
 
@@ -113,18 +111,18 @@ class GoldRush extends FlameGame
     super.lifecycleStateChange(state);
     switch (state) {
       case AppLifecycleState.paused:
-        children.forEach((component) {
+        for (var component in children) {
           if (component is Character) {
             component.onPaused();
           }
-        });
+        }
         break;
       case AppLifecycleState.resumed:
-        children.forEach((component) {
+        for (var component in children) {
           if (component is Character) {
             component.onResumed();
           }
-        });
+        }
         break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.detached:

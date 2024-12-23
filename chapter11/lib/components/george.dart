@@ -22,9 +22,9 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
       {required this.barrierOffsets,
       required this.hud,
       required Vector2 position,
-      required Vector2 size,
-      required double speed})
-      : super(position: position, size: size, speed: speed) {
+      required super.size,
+      required super.speed})
+      : super(position: position) {
     originalPosition = position;
   }
 
@@ -78,21 +78,21 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
   }
 
   @override
-  bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    if (event.data.keyLabel.toLowerCase().contains('a')) {
-      keyLeftPressed = (event is RawKeyDownEvent);
+  bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+    if (event.logicalKey.keyLabel.toLowerCase().contains('a')) {
+      keyLeftPressed = (event is KeyDownEvent);
     }
-    if (event.data.keyLabel.toLowerCase().contains('d')) {
-      keyRightPressed = (event is RawKeyDownEvent);
+    if (event.logicalKey.keyLabel.toLowerCase().contains('d')) {
+      keyRightPressed = (event is KeyDownEvent);
     }
-    if (event.data.keyLabel.toLowerCase().contains('w')) {
-      keyUpPressed = (event is RawKeyDownEvent);
+    if (event.logicalKey.keyLabel.toLowerCase().contains('w')) {
+      keyUpPressed = (event is KeyDownEvent);
     }
-    if (event.data.keyLabel.toLowerCase().contains('s')) {
-      keyDownPressed = (event is RawKeyDownEvent);
+    if (event.logicalKey.keyLabel.toLowerCase().contains('s')) {
+      keyDownPressed = (event is KeyDownEvent);
     }
-    if (event.data.keyLabel.toLowerCase().contains('r')) {
-      keyRunningPressed = (event is RawKeyDownEvent);
+    if (event.logicalKey.keyLabel.toLowerCase().contains('r')) {
+      keyRunningPressed = (event is KeyDownEvent);
     }
 
     return true;
@@ -121,8 +121,8 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
   }
 
   @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    super.onCollision(points, other);
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
 
     if (other is Zombie || other is Skeleton) {
       gameRef.world.add(ParticleSystemComponent(
@@ -357,12 +357,14 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
     keyDownPressed = false;
   }
 
+  @override
   void onPaused() {
     if (isMoving) {
       audioPlayerRunning.pause();
     }
   }
 
+  @override
   void onResumed() async {
     if (isMoving) {
       audioPlayerRunning.resume();

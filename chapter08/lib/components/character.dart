@@ -1,24 +1,21 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
-import 'package:goldrush/utils/math_utils.dart';
+import '../utils/math_utils.dart';
 import 'package:flame/extensions.dart';
 
 class Character extends SpriteAnimationComponent with CollisionCallbacks {
   Character(
-      {required Vector2 position,
-      required Vector2 size,
-      required double speed}) {
+      {required Vector2 position, required Vector2 size, required this.speed}) {
     this.position = position;
     this.size = size;
-    this.speed = speed;
   }
 
   late SpriteAnimation downAnimation,
       leftAnimation,
       upAnimation,
       rightAnimation;
-  late double speed;
+  double speed;
   double elapsedTime = 0.0;
   int currentDirection = down;
   static const int down = 0, left = 1, up = 2, right = 3;
@@ -28,10 +25,10 @@ class Character extends SpriteAnimationComponent with CollisionCallbacks {
   void onResumed() {}
 
   @override
-  void onGameResize(Vector2 canvasSize) {
-    super.onGameResize(canvasSize);
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
 
-    Rect gameScreenBounds = getGameScreenBounds(canvasSize);
+    Rect gameScreenBounds = getGameScreenBounds(size);
     position = Vector2(originalPosition.x + gameScreenBounds.left,
         originalPosition.y + gameScreenBounds.top);
   }

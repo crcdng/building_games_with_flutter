@@ -1,13 +1,10 @@
 import 'package:flame/collisions.dart';
-import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'character_enemy.dart';
 
 class Zombie extends EnemyCharacter {
-  Zombie(
-      {required Vector2 position, required Vector2 size, required double speed})
-      : super(position: position, size: size, speed: speed);
+  Zombie({required super.position, required super.size, required super.speed});
 
   @override
   Future<void> onLoad() async {

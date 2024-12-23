@@ -17,10 +17,10 @@ class HudComponent extends PositionComponent {
   bool isInitialised = false;
 
   @override
-  void onGameResize(Vector2 canvasSize) {
-    super.onGameResize(canvasSize);
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
 
-    Rect gameScreenBounds = getGameScreenBounds(canvasSize);
+    Rect gameScreenBounds = getGameScreenBounds(size);
 
     if (!isInitialised) {
       final joystickKnobPaint = BasicPalette.blue.withAlpha(200).paint();

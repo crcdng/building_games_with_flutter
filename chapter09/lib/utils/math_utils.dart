@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flame/extensions.dart';
 
 double getAngle(Vector2 origin, Vector2 target) {

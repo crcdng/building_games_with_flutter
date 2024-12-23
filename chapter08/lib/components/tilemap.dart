@@ -1,8 +1,8 @@
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
-import 'package:goldrush/main.dart';
-import 'package:goldrush/utils/math_utils.dart';
+import '../main.dart';
+import '../utils/math_utils.dart';
 
 // to position tiles when the screen resizes.
 class TileMapComponent extends PositionComponent with HasGameRef<GoldRush> {
@@ -13,12 +13,12 @@ class TileMapComponent extends PositionComponent with HasGameRef<GoldRush> {
   TiledComponent tiledComponent;
 
   @override
-  void onGameResize(Vector2 canvasSize) {
-    super.onGameResize(canvasSize);
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
 
-    Rect gameScreenBounds = getGameScreenBounds(canvasSize);
-    if (canvasSize.x > game.mapSize.x) {
-      double xAdjust = (canvasSize.x - game.mapSize.x) / 2;
+    Rect gameScreenBounds = getGameScreenBounds(size);
+    if (size.x > game.mapSize.x) {
+      double xAdjust = (size.x - game.mapSize.x) / 2;
       position = Vector2(gameScreenBounds.left + xAdjust, gameScreenBounds.top);
     } else {
       position = Vector2(gameScreenBounds.left, gameScreenBounds.top);

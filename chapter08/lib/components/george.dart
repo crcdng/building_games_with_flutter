@@ -3,22 +3,22 @@ import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/services.dart';
-import 'package:goldrush/components/hud/hud.dart';
-import 'package:goldrush/components/skeleton.dart';
-import 'package:goldrush/components/water.dart';
-import 'package:goldrush/components/zombie.dart';
-import 'package:goldrush/components/coin.dart';
-import 'package:goldrush/components/character.dart';
-import 'package:goldrush/utils/math_utils.dart';
+import 'hud/hud.dart';
+import 'skeleton.dart';
+import 'water.dart';
+import 'zombie.dart';
+import 'coin.dart';
+import 'character.dart';
+import '../utils/math_utils.dart';
 import 'package:flame_audio/flame_audio.dart';
 
 class George extends Character with KeyboardHandler {
   George(
       {required this.hud,
       required Vector2 position,
-      required Vector2 size,
-      required double speed})
-      : super(position: position, size: size, speed: speed) {
+      required super.size,
+      required super.speed})
+      : super(position: position) {
     originalPosition = position;
   }
 
@@ -69,21 +69,21 @@ class George extends Character with KeyboardHandler {
   }
 
   @override
-  bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    if (event.data.keyLabel.toLowerCase().contains('a')) {
-      keyLeftPressed = (event is RawKeyDownEvent);
+  bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+    if (event.logicalKey.keyLabel.toLowerCase().contains('a')) {
+      keyLeftPressed = (event is KeyDownEvent);
     }
-    if (event.data.keyLabel.toLowerCase().contains('d')) {
-      keyRightPressed = (event is RawKeyDownEvent);
+    if (event.logicalKey.keyLabel.toLowerCase().contains('d')) {
+      keyRightPressed = (event is KeyDownEvent);
     }
-    if (event.data.keyLabel.toLowerCase().contains('w')) {
-      keyUpPressed = (event is RawKeyDownEvent);
+    if (event.logicalKey.keyLabel.toLowerCase().contains('w')) {
+      keyUpPressed = (event is KeyDownEvent);
     }
-    if (event.data.keyLabel.toLowerCase().contains('s')) {
-      keyDownPressed = (event is RawKeyDownEvent);
+    if (event.logicalKey.keyLabel.toLowerCase().contains('s')) {
+      keyDownPressed = (event is KeyDownEvent);
     }
-    if (event.data.keyLabel.toLowerCase().contains('r')) {
-      keyRunningPressed = (event is RawKeyDownEvent);
+    if (event.logicalKey.keyLabel.toLowerCase().contains('r')) {
+      keyRunningPressed = (event is KeyDownEvent);
     }
 
     return true;
@@ -95,8 +95,8 @@ class George extends Character with KeyboardHandler {
   }
 
   @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    super.onCollision(points, other);
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
 
     if (other is Zombie || other is Skeleton) {
       other.removeFromParent();
@@ -296,12 +296,14 @@ class George extends Character with KeyboardHandler {
     keyDownPressed = false;
   }
 
+  @override
   void onPaused() {
     if (isMoving) {
       audioPlayerRunning.pause();
     }
   }
 
+  @override
   void onResumed() async {
     if (isMoving) {
       audioPlayerRunning.resume();

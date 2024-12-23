@@ -5,9 +5,8 @@ import 'package:flame/sprite.dart';
 import 'character_enemy.dart';
 
 class Zombie extends EnemyCharacter {
-  Zombie(
-      {required Vector2 position, required Vector2 size, required double speed})
-      : super(position: position, size: size, speed: speed) {
+  Zombie({required Vector2 position, required super.size, required super.speed})
+      : super(position: position) {
     originalPosition = position;
   }
 

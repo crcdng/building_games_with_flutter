@@ -20,10 +20,10 @@ class Water extends PositionComponent with CollisionCallbacks {
   }
 
   @override
-  void onGameResize(Vector2 canvasSize) {
-    super.onGameResize(canvasSize);
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
 
-    Rect gameScreenBounds = getGameScreenBounds(canvasSize);
+    Rect gameScreenBounds = getGameScreenBounds(size);
     position = Vector2(originalPosition.x + gameScreenBounds.left,
         originalPosition.y + gameScreenBounds.top);
   }

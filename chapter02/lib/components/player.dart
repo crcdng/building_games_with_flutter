@@ -29,8 +29,8 @@ class Player extends PositionComponent with CollisionCallbacks, HasGameRef {
   }
 
   @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    super.onCollision(points, other);
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
     if (other is ScreenHitbox) {
       if (squareDirection == 1) {
         squareDirection = -1;
@@ -41,9 +41,9 @@ class Player extends PositionComponent with CollisionCallbacks, HasGameRef {
   }
 
   @override
-  void update(double deltaTime) {
-    super.update(deltaTime);
-    position.x += squareSpeed * squareDirection * deltaTime;
+  void update(double dt) {
+    super.update(dt);
+    position.x += squareSpeed * squareDirection * dt;
   }
 
   // only the hitbox is rendered (see onLoad))

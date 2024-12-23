@@ -5,19 +5,16 @@ import 'package:flame/sprite.dart';
 // Base class for all our sprites
 class Character extends SpriteAnimationComponent with CollisionCallbacks {
   Character(
-      {required Vector2 position,
-      required Vector2 size,
-      required double speed}) {
+      {required Vector2 position, required Vector2 size, required this.speed}) {
     this.position = position;
     this.size = size;
-    this.speed = speed;
   }
 
   late SpriteAnimation downAnimation,
       leftAnimation,
       upAnimation,
       rightAnimation;
-  late double speed;
+  double speed;
   double elapsedTime = 0.0;
   int currentDirection = down;
   static const int down = 0, left = 1, up = 2, right = 3;

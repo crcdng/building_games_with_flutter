@@ -1,25 +1,18 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/input.dart';
-import 'package:flutter/material.dart';
 
 class RunButton extends HudButtonComponent {
+  // ignore: use_super_parameters
   RunButton({
-    required button,
-    buttonDown,
-    EdgeInsets? margin,
-    Vector2? position,
+    required PositionComponent super.button,
+    super.buttonDown,
+    super.margin,
+    super.position,
     Vector2? size,
-    Anchor anchor = Anchor.center,
-    onPressed,
-  }) : super(
-            button: button,
-            buttonDown: buttonDown,
-            margin: margin,
-            position: position,
-            size: size ?? button.size,
-            anchor: anchor,
-            onPressed: onPressed);
+    Anchor super.anchor = Anchor.center,
+    void Function()? super.onPressed,
+  }) : super(size: size ?? button.size);
 
   bool buttonPressed = false;
 

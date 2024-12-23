@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
-import 'package:goldrush/components/hud/run_button.dart';
-import 'package:goldrush/components/hud/score_text.dart';
-import 'package:goldrush/components/hud/joystick.dart';
+import 'run_button.dart';
+import 'score_text.dart';
+import 'joystick.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 
@@ -24,13 +24,13 @@ class HudComponent extends PositionComponent {
     joystick = Joystick(
       knob: CircleComponent(radius: 20.0, paint: joystickKnobPaint),
       background: CircleComponent(radius: 40.0, paint: joystickBackgroundPaint),
-      margin: const EdgeInsets.only(left: 260, top: 40),
+      margin: const EdgeInsets.only(left: 40, bottom: 40),
     );
 
     runButton = RunButton(
         button: CircleComponent(radius: 25.0, paint: buttonRunPaint),
         buttonDown: CircleComponent(radius: 25.0, paint: buttonDownRunPaint),
-        margin: const EdgeInsets.only(left: 190, top: 50),
+        margin: const EdgeInsets.only(right: 20, bottom: 50),
         onPressed: () => {});
 
     scoreText = ScoreText(margin: const EdgeInsets.only(left: 40, top: 60));
@@ -38,6 +38,7 @@ class HudComponent extends PositionComponent {
     add(joystick);
     add(runButton);
     add(scoreText);
+
     // DEPRECATED
     //  positionType = PositionType.viewport;
   }

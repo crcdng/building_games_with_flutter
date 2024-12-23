@@ -50,7 +50,7 @@ class GoldRush extends FlameGame
 
     Rect gameScreenBounds = getGameScreenBounds(canvasSize);
 
-    var musicVolume;
+    late double musicVolume;
     await SharedPreferences.getInstance()
         .then((prefs) => prefs.getDouble('musicVolume') ?? 25.0)
         .then((savedMusicVolume) => musicVolume = savedMusicVolume);
@@ -139,18 +139,18 @@ class GoldRush extends FlameGame
     super.lifecycleStateChange(state);
     switch (state) {
       case AppLifecycleState.paused:
-        children.forEach((component) {
+        for (var component in children) {
           if (component is Character) {
             component.onPaused();
           }
-        });
+        }
         break;
       case AppLifecycleState.resumed:
-        children.forEach((component) {
+        for (var component in children) {
           if (component is Character) {
             component.onResumed();
           }
-        });
+        }
         break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.detached:

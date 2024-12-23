@@ -4,8 +4,7 @@ import 'package:flame/palette.dart';
 import 'package:flutter/cupertino.dart';
 
 class HealthText extends HudMarginComponent {
-
-  HealthText({Vector2? position}) : super (position: position);
+  HealthText({super.position});
 
   int health = 100;
   String healthText = "Health: ";
@@ -17,14 +16,16 @@ class HealthText extends HudMarginComponent {
   Future<void> onLoad() async {
     super.onLoad();
 
-    TextStyle textStyle = TextStyle(color: BasicPalette.blue.color, fontSize: 30.0);
+    TextStyle textStyle =
+        TextStyle(color: BasicPalette.blue.color, fontSize: 30.0);
     _regularPaint = TextPaint(style: textStyle);
-    healthTextComponent = TextComponent(text: healthText + health.toString(), textRenderer: _regularPaint);
+    healthTextComponent = TextComponent(
+        text: healthText + health.toString(), textRenderer: _regularPaint);
 
     add(healthTextComponent);
   }
 
-  setHealth(int health) {
+  void setHealth(int health) {
     this.health = health;
     healthTextComponent.text = healthText + this.health.toString();
   }

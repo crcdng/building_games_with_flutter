@@ -4,26 +4,25 @@ import 'package:flame/components.dart';
 import 'package:goldrush/utils/math_utils.dart';
 import 'dart:math';
 
-enum EnemyMovementType { WALKING, CHASING }
+enum EnemyMovementType { walking, chasing }
 
 class EnemyCharacter extends Character {
   EnemyCharacter(
       {required Character player,
-      required Vector2 position,
-      required Vector2 size,
-      required double speed})
+      required super.position,
+      required super.size,
+      required super.speed})
       : playerToTrack = player,
         walkingSpeed = speed,
-        chasingSpeed = speed * 2,
-        super(position: position, size: size, speed: speed);
+        chasingSpeed = speed * 2;
 
   Character playerToTrack;
-  EnemyMovementType enemyMovementType = EnemyMovementType.WALKING;
-  static const DISTANCE_TO_TRACK = 150.0;
+  EnemyMovementType enemyMovementType = EnemyMovementType.walking;
+  static const distanceToTrack = 150.0;
   double walkingSpeed, chasingSpeed;
 
   void changeDirection() {
-    Random random = new Random();
+    Random random = Random();
     int newDirection = random.nextInt(4);
 
     switch (newDirection) {
@@ -46,7 +45,7 @@ class EnemyCharacter extends Character {
 
   bool isPlayerNearAndVisible() {
     bool isPlayerNear =
-        position.distanceTo(playerToTrack.position) < DISTANCE_TO_TRACK;
+        position.distanceTo(playerToTrack.position) < distanceToTrack;
     bool isEnemyFacingPlayer = false;
 
     var angle = getAngle(position, playerToTrack.position);
@@ -68,18 +67,18 @@ class EnemyCharacter extends Character {
   }
 
   @override
-  void update(double deltaTime) {
-    super.update(deltaTime);
+  void update(double dt) {
+    super.update(dt);
 
-    elapsedTime += deltaTime;
+    elapsedTime += dt;
 
     speed = isPlayerNearAndVisible() ? chasingSpeed : walkingSpeed;
     enemyMovementType = isPlayerNearAndVisible()
-        ? EnemyMovementType.CHASING
-        : EnemyMovementType.WALKING;
+        ? EnemyMovementType.chasing
+        : EnemyMovementType.walking;
 
     switch (enemyMovementType) {
-      case EnemyMovementType.WALKING:
+      case EnemyMovementType.walking:
         if (elapsedTime > 3.0) {
           changeDirection();
           elapsedTime = 0.0;
@@ -87,29 +86,29 @@ class EnemyCharacter extends Character {
 
         switch (currentDirection) {
           case Character.down:
-            position.y += speed * deltaTime;
+            position.y += speed * dt;
             break;
           case Character.left:
-            position.x -= speed * deltaTime;
+            position.x -= speed * dt;
             break;
           case Character.up:
-            position.y -= speed * deltaTime;
+            position.y -= speed * dt;
             break;
           case Character.right:
-            position.x += speed * deltaTime;
+            position.x += speed * dt;
             break;
         }
         break;
-      case EnemyMovementType.CHASING:
+      case EnemyMovementType.chasing:
         Vector2 direction = (playerToTrack.position - position).normalized();
-        position += direction * deltaTime * speed;
+        position += direction * dt * speed;
         break;
     }
   }
 
   @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    super.onCollision(points, other);
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
     if (other is Water) {
       switch (currentDirection) {
         case Character.down:

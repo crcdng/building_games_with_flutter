@@ -1,3 +1,4 @@
+import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,8 @@ class GoldRush extends FlameGame {
   @override
   Future<void> onLoad() async {
     super.onLoad();
+
+    camera.viewfinder.anchor = Anchor.topLeft;
 
     // Get the width and height of our screen canvas
     screenWidth = size.x;

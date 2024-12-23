@@ -3,12 +3,12 @@ import 'package:flame/flame.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
-import 'package:goldrush/components/character.dart';
-import 'package:goldrush/components/coin.dart';
-import 'package:goldrush/components/hud/hud.dart';
-import 'package:goldrush/components/water.dart';
-import 'package:goldrush/components/zombie.dart';
-import 'package:goldrush/components/skeleton.dart';
+import 'components/character.dart';
+import 'components/coin.dart';
+import 'components/hud/hud.dart';
+import 'components/water.dart';
+import 'components/zombie.dart';
+import 'components/skeleton.dart';
 import 'components/background.dart';
 import 'components/george.dart';
 import 'package:flame_audio/flame_audio.dart';
@@ -39,7 +39,7 @@ class GoldRush extends FlameGame with HasCollisionDetection {
     final tiledMap = await TiledComponent.load('tiles.tmx', Vector2.all(32));
     mapSize = tiledMap.size; // required in Background
 
-    var hud = HudComponent();
+    var hud = HudComponent()..size = size;
     var george = George(
         hud: hud,
         position: Vector2(200, 400),
@@ -107,18 +107,18 @@ class GoldRush extends FlameGame with HasCollisionDetection {
     super.lifecycleStateChange(state);
     switch (state) {
       case AppLifecycleState.paused:
-        children.forEach((component) {
+        for (var component in children) {
           if (component is Character) {
             component.onPaused();
           }
-        });
+        }
         break;
       case AppLifecycleState.resumed:
-        children.forEach((component) {
+        for (var component in children) {
           if (component is Character) {
             component.onResumed();
           }
-        });
+        }
         break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.detached:

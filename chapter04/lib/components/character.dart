@@ -6,19 +6,17 @@ import 'package:flame/sprite.dart';
 //Base class for all our sprites
 class Character extends SpriteAnimationComponent with CollisionCallbacks {
   Character(
-      {required Vector2 position,
-      required Vector2 size,
-      required double speed}) {
+      {required Vector2 position, required Vector2 size, required this.speed}) {
     this.position = position;
     this.size = size;
-    this.speed = speed;
   }
+
+  double speed;
 
   late SpriteAnimation downAnimation,
       leftAnimation,
       upAnimation,
       rightAnimation;
-  late double speed;
   double elapsedTime = 0.0;
   int currentDirection = down;
   static const int down = 0, left = 1, up = 2, right = 3;
@@ -46,10 +44,10 @@ class Character extends SpriteAnimationComponent with CollisionCallbacks {
   }
 
   @override
-  void update(double deltaTime) {
-    super.update(deltaTime);
+  void update(double dt) {
+    super.update(dt);
 
-    elapsedTime += deltaTime;
+    elapsedTime += dt;
     if (elapsedTime > 3.0) {
       changeDirection();
       elapsedTime = 0.0;
@@ -57,23 +55,23 @@ class Character extends SpriteAnimationComponent with CollisionCallbacks {
 
     switch (currentDirection) {
       case down:
-        position.y += speed * deltaTime;
+        position.y += speed * dt;
         break;
       case left:
-        position.x -= speed * deltaTime;
+        position.x -= speed * dt;
         break;
       case up:
-        position.y -= speed * deltaTime;
+        position.y -= speed * dt;
         break;
       case right:
-        position.x += speed * deltaTime;
+        position.x += speed * dt;
         break;
     }
   }
 
   @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    super.onCollision(points, other);
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
     if (other is ScreenHitbox) {
       switch (currentDirection) {
         case down:

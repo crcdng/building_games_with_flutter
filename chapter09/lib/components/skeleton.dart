@@ -6,8 +6,8 @@ import 'character_enemy.dart';
 
 class Skeleton extends EnemyCharacter {
   Skeleton(
-      {required Vector2 position, required Vector2 size, required double speed})
-      : super(position: position, size: size, speed: speed) {
+      {required Vector2 position, required super.size, required super.speed})
+      : super(position: position) {
     originalPosition = position;
   }
 

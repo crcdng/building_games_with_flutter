@@ -17,7 +17,7 @@ Particle explodingParticle(Vector2 origin, MaterialColor color) {
         Vector2 destination = Vector2(xx, yy);
         return ComputedParticle(renderer: (Canvas canvas, Particle particle) {
           Paint paint = Paint()
-            ..color = color.withOpacity(1.0 - particle.progress);
+            ..color = color.withValues(alpha: 1.0 - particle.progress);
           canvas.drawCircle(Offset.zero, 10.5, paint);
         }).moving(from: origin, to: destination);
       });

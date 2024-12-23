@@ -6,18 +6,18 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'dart:math';
-import 'package:goldrush/components/background.dart';
-import 'package:goldrush/components/character.dart';
-import 'package:goldrush/components/coin.dart';
-import 'package:goldrush/components/george.dart';
-import 'package:goldrush/components/hud/hud.dart';
-import 'package:goldrush/components/water.dart';
-import 'package:goldrush/components/zombie.dart';
-import 'package:goldrush/components/skeleton.dart';
-import 'package:goldrush/utils/map_utils.dart';
+import 'components/background.dart';
+import 'components/character.dart';
+import 'components/coin.dart';
+import 'components/george.dart';
+import 'components/hud/hud.dart';
+import 'components/water.dart';
+import 'components/zombie.dart';
+import 'components/skeleton.dart';
+import 'utils/map_utils.dart';
 import 'package:flame_audio/flame_audio.dart';
-import 'package:goldrush/components/tilemap.dart';
-import 'package:goldrush/utils/math_utils.dart';
+import 'components/tilemap.dart';
+import 'utils/math_utils.dart';
 
 void main() async {
   final goldRush = GoldRush();
@@ -40,7 +40,7 @@ class GoldRush extends FlameGame
     Rect gameScreenBounds = getGameScreenBounds(canvasSize);
 
     FlameAudio.bgm.initialize();
-    await FlameAudio.bgm.play('music/music.mp3', volume: 0.1);
+    await FlameAudio.bgm.play('music/music.mp3', volume: 0.5);
 
     final tiledMap = await TiledComponent.load('tiles.tmx', Vector2.all(32));
     mapSize = tiledMap.size;
@@ -121,18 +121,18 @@ class GoldRush extends FlameGame
     super.lifecycleStateChange(state);
     switch (state) {
       case AppLifecycleState.paused:
-        children.forEach((component) {
+        for (var component in children) {
           if (component is Character) {
             component.onPaused();
           }
-        });
+        }
         break;
       case AppLifecycleState.resumed:
-        children.forEach((component) {
+        for (var component in children) {
           if (component is Character) {
             component.onResumed();
           }
-        });
+        }
         break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.detached:
