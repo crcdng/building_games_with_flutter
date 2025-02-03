@@ -1,4 +1,4 @@
-# building_games_with_flutter
+# Building Games with Flutter
 
 Updated code of the book "Building Games with Flutter" by Paul Teale / Packt
 
