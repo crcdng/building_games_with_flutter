@@ -1,8 +1,10 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/palette.dart';
+import 'package:goldrush/main.dart';
 
-class Player extends PositionComponent with CollisionCallbacks, HasGameRef {
+class Player extends PositionComponent
+    with CollisionCallbacks, HasGameReference<GoldRush> {
   static const int squareSpeed = 250; // The speed that our square will animate
   static final squarePaint =
       BasicPalette.green.paint(); // The color of the square

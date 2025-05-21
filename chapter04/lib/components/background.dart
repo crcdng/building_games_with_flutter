@@ -2,8 +2,9 @@ import 'package:flame/components.dart';
 import 'dart:ui';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:goldrush/main.dart';
 
-class Background extends PositionComponent with HasGameRef {
+class Background extends PositionComponent with HasGameReference<GoldRush> {
   static final backgroundPaint =
       BasicPalette.white.paint(); // The color of the background
   late double screenWidth, screenHeight;

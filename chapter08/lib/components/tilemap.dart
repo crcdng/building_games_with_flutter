@@ -5,7 +5,8 @@ import '../main.dart';
 import '../utils/math_utils.dart';
 
 // to position tiles when the screen resizes.
-class TileMapComponent extends PositionComponent with HasGameRef<GoldRush> {
+class TileMapComponent extends PositionComponent
+    with HasGameReference<GoldRush> {
   TileMapComponent(this.tiledComponent) {
     add(tiledComponent);
   }

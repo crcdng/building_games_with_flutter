@@ -6,7 +6,7 @@ import '../utils/math_utils.dart';
 import 'dart:ui';
 
 class Background extends PositionComponent
-    with TapCallbacks, HasGameRef<GoldRush> {
+    with TapCallbacks, HasGameReference<GoldRush> {
   Background(this.george) : super(priority: 20);
 
   final George george;

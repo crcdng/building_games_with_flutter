@@ -7,7 +7,7 @@ import '../main.dart';
 import 'george.dart';
 
 class Background extends PositionComponent
-    with HasGameRef<GoldRush>, TapCallbacks {
+    with HasGameReference<GoldRush>, TapCallbacks {
   Background(this.george);
 
   final George george;

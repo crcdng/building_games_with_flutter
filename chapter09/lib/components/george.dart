@@ -15,7 +15,8 @@ import '../utils/effects.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
 
-class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
+class George extends Character
+    with KeyboardHandler, HasGameReference<GoldRush> {
   George(
       {required this.hud,
       required Vector2 position,
@@ -101,7 +102,7 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
     super.onCollision(intersectionPoints, other);
 
     if (other is Zombie || other is Skeleton) {
-      gameRef.world.add(ParticleSystemComponent(
+      game.world.add(ParticleSystemComponent(
           particle: explodingParticle(other.position, Colors.red)));
       other.removeFromParent();
       hud.scoreText.setScore(10);
@@ -110,7 +111,7 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
     }
 
     if (other is Coin) {
-      gameRef.world.add(ParticleSystemComponent(
+      game.world.add(ParticleSystemComponent(
           particle: explodingParticle(other.position, Colors.yellow)));
       other.removeFromParent();
       hud.scoreText.setScore(20);

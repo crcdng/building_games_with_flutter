@@ -10,9 +10,16 @@ Offset worldToGridOffset(Vector2 mapLocation) {
   return Offset(x, y);
 }
 
-Vector2 gridOffsetToWorld(Offset gridOffset) {
-  double x = (gridOffset.dx * tileSize);
-  double y = (gridOffset.dy * tileSize);
+(int, int) worldToGridIntTuple(Vector2 mapLocation) {
+  double x = (mapLocation.x / tileSize).floor().toDouble();
+  double y = (mapLocation.y / tileSize).floor().toDouble();
+
+  return (x.toInt(), y.toInt());
+}
+
+Vector2 gridIntTupleToWorld((int, int) gridIntTuple) {
+  double x = (gridIntTuple.$1.toDouble() * tileSize);
+  double y = (gridIntTuple.$2.toDouble() * tileSize);
 
   return Vector2(x, y);
 }

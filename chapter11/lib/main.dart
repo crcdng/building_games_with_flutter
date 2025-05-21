@@ -61,11 +61,11 @@ class GoldRush extends FlameGame
     final tiledMap = await TiledComponent.load('tiles.tmx', Vector2.all(32));
     world.add(TileMapComponent(tiledMap));
 
-    List<Offset> barrierOffsets = [];
+    List<(int, int)> barrierOffsets = [];
     final water = tiledMap.tileMap.getLayer<ObjectGroup>('Water');
     water?.objects.forEach((rect) {
       if (rect.width == 32 && rect.height == 32) {
-        barrierOffsets.add(worldToGridOffset(Vector2(rect.x, rect.y)));
+        barrierOffsets.add(worldToGridIntTuple(Vector2(rect.x, rect.y)));
       }
       world.add(Water(
           position: Vector2(

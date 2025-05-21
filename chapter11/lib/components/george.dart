@@ -17,7 +17,8 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:goldrush/utils/effects.dart';
 import 'package:flutter/material.dart';
 
-class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
+class George extends Character
+    with KeyboardHandler, HasGameReference<GoldRush> {
   George(
       {required this.barrierOffsets,
       required this.hud,
@@ -42,8 +43,8 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
       keyDownPressed = false,
       keyRunningPressed = false;
   int health = 100;
-  List<Offset> barrierOffsets;
-  List<Offset> pathToTargetLocation = [];
+  List<(int, int)> barrierOffsets;
+  List<(int, int)> pathToTargetLocation = [];
   int currentPathStep = -1;
 
   @override
@@ -102,8 +103,8 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
     pathToTargetLocation = AStar(
             rows: 50,
             columns: 50,
-            start: worldToGridOffset(position),
-            end: worldToGridOffset(localPosition),
+            start: worldToGridIntTuple(position),
+            end: worldToGridIntTuple(localPosition),
             withDiagonal: true,
             barriers: barrierOffsets)
         .findThePath()
@@ -114,7 +115,7 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
 
     // As pathToTargetLocation[0] is the same as the current position, we set the currentPathStep to the next step, 1
     currentPathStep = 1;
-    targetLocation = gridOffsetToWorld(pathToTargetLocation[currentPathStep]);
+    targetLocation = gridIntTupleToWorld(pathToTargetLocation[currentPathStep]);
     targetLocation.add(Vector2(16, 16));
 
     movingToTouchedLocation = true;
@@ -125,7 +126,7 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
     super.onCollision(intersectionPoints, other);
 
     if (other is Zombie || other is Skeleton) {
-      gameRef.world.add(ParticleSystemComponent(
+      game.world.add(ParticleSystemComponent(
           particle: explodingParticle(other.position, Colors.red)));
       other.removeFromParent();
 
@@ -136,14 +137,14 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
 
       if (health == 0) {
         Navigator.pushNamedAndRemoveUntil(
-            gameRef.buildContext!, "/gameover", (r) => false);
+            game.buildContext!, "/gameover", (r) => false);
       }
 
       FlameAudio.play('sounds/enemy_dies.wav', volume: 1.0);
     }
 
     if (other is Coin) {
-      gameRef.world.add(ParticleSystemComponent(
+      game.world.add(ParticleSystemComponent(
           particle: explodingParticle(other.position, Colors.yellow)));
       other.removeFromParent();
       hud.scoreText.setScore(20);
@@ -284,7 +285,7 @@ class George extends Character with KeyboardHandler, HasGameRef<GoldRush> {
       if (currentPathStep < pathToTargetLocation.length - 1) {
         currentPathStep++;
         targetLocation =
-            gridOffsetToWorld(pathToTargetLocation[currentPathStep]);
+            gridIntTupleToWorld(pathToTargetLocation[currentPathStep]);
         targetLocation.add(Vector2(16, 16));
       } else {
         stopAnimations();

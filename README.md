@@ -2,7 +2,7 @@
 
 Updated code of the book "Building Games with Flutter" by Paul Teale / Packt
 
-updated for Flame 1.22 / Flutter 3.27. NOTE the code now diverges from the book but works with these versions and it is run through `flutter_lints`.
+Now for Flame 1.28.1 / Flutter 3.32. NOTE the code now diverges from the book to be compatible with latest versions. I also run it through `flutter_lints`.
 
 - https://flame-engine.org/
 - https://flutter.dev/
@@ -15,9 +15,11 @@ Rationale: I found the book to be a good comprehensive introduction to game deve
 
 I checked  
 
-- chapter 1, 2, 4 on macOS (chapter 3 doesn't have code),
-- chapter 5 to 7 and 9 to 11 on macOS and on an Pixel 7 / Android 35 emulator, and
-- chapter 8 on Chrome / web.
+- chapter 1, 2, 4 to 7 and 9 to 11 on macOS (chapter 3 doesn't have code),
+- chapter 8 on Chrome / web, and
+- chapter 11 also on a Pixel 7 / Android 35 emulator.
+
+KNOWN BUG in chapter 8: starting background music or playing any sounds without prior user interaction throws an exception on web.
 
 Platform folders are not in git so you have to add them yourself.
 
