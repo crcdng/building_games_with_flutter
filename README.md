@@ -19,8 +19,6 @@ I checked
 - chapter 8 on Chrome / web, and
 - chapter 11 also on a Pixel 7 / Android 35 emulator.
 
-KNOWN BUG in chapter 8: starting background music or playing any sounds without prior user interaction throws an exception on web.
-
 Platform folders are not in git so you have to add them yourself.
 
 TODO: test on mobile devices, refactor a few more places, tweak parameters
